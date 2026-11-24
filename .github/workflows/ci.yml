@@ -1,0 +1,13 @@
+name: verify
+on: [push, pull_request]
+jobs:
+  macos:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: swift build -c release
+      - name: 校验套件
+        run: swift run -c release efbverify
+      - name: 演示（输出归档）
+        run: swift run -c release efbdemo
